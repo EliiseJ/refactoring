@@ -4,9 +4,10 @@ public class Driver {
 
     private int age;
     private boolean licence;
+    private int timeOfLicense;
     private boolean hasCausedAccidents;
 
-    public boolean isHasCausedAccidents() {
+    public boolean hasCausedAccidents() {
         return hasCausedAccidents;
     }
 
@@ -16,5 +17,9 @@ public class Driver {
 
     public boolean isLicence() {
         return licence;
+    }
+
+    public int getTimeOfLicense() {
+        return timeOfLicense;
     }
 }
