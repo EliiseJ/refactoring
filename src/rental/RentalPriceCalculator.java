@@ -1,5 +1,7 @@
 package rental;
 
+import rental.RentalData;
+
 public class RentalPriceCalculator {
 	
 	// age - age of driver
@@ -8,30 +10,30 @@ public class RentalPriceCalculator {
 	// acc - has s/he caused any accidents within last year
 	// acc2 - has s/he participated (but not caused) in any accidents within last year
 	// season - if it is high season or not
-	public double price(int age, int licence, int clazz, boolean acc, boolean acc2, boolean season) {
+	public double price(RentalData rentalData) {
 		
-		if (age < 18) {
+		if (rentalData.getAge() < 18) {
 			throw new IllegalArgumentException("Driver too young - cannot quote the price");
 		}
-		if (age <= 21 && clazz > 2) {
+		if (rentalData.getAge() <= 21 && rentalData.getClazz() > 2) {
 			throw new UnsupportedOperationException("Drivers 21 y/o or less can only rent Class 1 vehicles");
 		}
 		
-		double rentalprice = age;
+		double rentalprice = rentalData.getAge();
 		
-		if (clazz >=4 && age <= 25 && season != false) {
+		if (rentalData.getClazz() >=4 && rentalData.getAge() <= 25 && rentalData.isSeason() != false) {
 			rentalprice = rentalprice * 2;
 		}
 		
-		if (licence < 1) {
+		if (rentalData.getLicence() < 1) {
 			throw new IllegalArgumentException("Driver must hold driving licence at least for one year. Can not rent a car!");
 		}
 		
-		if (licence < 3) {
+		if (rentalData.getLicence() < 3) {
 			rentalprice = rentalprice * 1.3;
 		}
 		
-		if (acc == true && age < 30) {
+		if (rentalData.isAcc() == true && rentalData.getAge() < 30) {
 			rentalprice += 15;
 		}
 
